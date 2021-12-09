@@ -2,7 +2,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from ..config import Config
-from ..tools.text import TEXT
+from ..tools.text import TEXT, PICS
 from ..database.database import *
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
@@ -56,11 +56,12 @@ async def start(c, m, cb=False):
             reply_markup=reply_markup
         )
     else:
-        await m.reply_text(
-            text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
+        await m.reply_photo(
+            photo=random.choice(PICS),
+            caption=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
             disable_web_page_preview=True,
             reply_markup=reply_markup,
-            quote=True
+            parse_mode='html'        
         ) 
 
 
